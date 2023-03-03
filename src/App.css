@@ -1,0 +1,58 @@
+div.App {
+  width: 50vw;
+  height: 100vh;
+  margin: auto;
+}
+
+div.content-main div.feat-top-form,
+div.feat-top-form form {
+  width: 100%;
+}
+
+div.feat-top-form form {
+  padding: 15px;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+input.midl-input {
+  margin: 0 15px;
+}
+
+div.feat-top-form form button {
+  padding: 5px;
+  border-radius: 3px;
+  background-color: #3266bb;
+  border: 1px solid #3266bb;
+  color: white;
+  outline: none;
+}
+
+input {
+  outline: none;
+  padding: 5px;
+}
+
+div.middle-feat {
+  text-align: right;
+  margin: 15px 0;
+  padding: 5px;
+}
+
+div.middle-feat button {
+  color: white;
+  padding: 5px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+div.middle-feat button:first-child {
+  margin-right: 5px;
+  background-color: #ed5959;
+  border: 1px solid #ed5959;
+}
+
+div.middle-feat button:last-child {
+  background-color: #59ed85;
+  border: 1px solid #59ed85;
+}
