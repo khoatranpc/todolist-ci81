@@ -9,8 +9,8 @@ const Table = (props) => {
                 <div className="header status-todo">Status</div>
                 <div className="header action-todo">Action</div>
             </div>
-            {props.data.map((item) => {
-                return <div className="row">
+            {props.data.length !== 0 ? props.data.map((item, idx) => {
+                return <div className="row" key={idx}>
                     <div className="cell name">
                         {item.name}
                     </div>
@@ -21,11 +21,13 @@ const Table = (props) => {
                         <div className="data">{item.status ? 'Completed' : 'Pending'}</div>
                     </div>
                     <div className="cell action">
-                        <button onClick={() => { props.showAlert() }}>Edit</button>
+                        <button onClick={() => { props.showAlert(item) }}>Edit</button>
                         <button onClick={() => { props.deleteTodo(item.id) }}>Delete</button>
                     </div>
                 </div>
-            })}
+            }) :
+                <div>Không có dữ liệu</div>
+            }
         </div>
     )
 }

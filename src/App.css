@@ -56,3 +56,7 @@ div.middle-feat button:last-child {
   background-color: #59ed85;
   border: 1px solid #59ed85;
 }
+
+div.search-input {
+  margin-bottom: 5px;
+}
