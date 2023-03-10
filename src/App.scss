@@ -2,6 +2,12 @@ div.App {
   width: 50vw;
   height: 100vh;
   margin: auto;
+
+
+}
+
+* {
+  color: var(--color);
 }
 
 div.content-main div.feat-top-form,
@@ -10,6 +16,7 @@ div.feat-top-form form {
 }
 
 div.feat-top-form form {
+  background-color: var(--background);
   padding: 15px;
   border: 1px solid gray;
   border-radius: 5px;
