@@ -1,13 +1,40 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import App from './App';
+import './index.css';
+import './themes/theme.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import MainLayout from './layouts/main';
+import AuthLayout from './layouts/auth';
+import Login from './components/Login';
+import AuthProtect from './components/AuthProtect';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+
+    <BrowserRouter>
+
+      <Routes>
+
+        <Route path='/' element={
+          // <AuthProtect>
+          <MainLayout />
+          // </AuthProtect> 
+        }>
+          <Route path='home' element={<App />} />
+          <Route path='hihi' element={<>hihi</>} />
+        </Route>
+        <Route path='/auth' element={<AuthLayout />} >
+          <Route path='login' element={<Login />} />
+          <Route path='register' element={<>Đăng ký</>} />
+        </Route>
+
+      </Routes>
+
+    </BrowserRouter>
+
   </React.StrictMode>
 );
 
