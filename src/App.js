@@ -28,7 +28,7 @@ const dataTodos = [
 ]
 
 function App() {
-  const [initTodo, setInitTodo] = useState(dataTodos);
+  const [initTodo, setInitTodo] = useState([]);
   const [nameTodo, setNameTodo] = useState('');
   const [desTodo, setDesTodo] = useState('');
   const [isSearch, setIsSearch] = useState('');
@@ -40,11 +40,16 @@ function App() {
 
   useEffect(() => {
     const getData = async () => {
-      // const data = await axios.put(`${BASE_URL_API}/api/v1/animals`,);
-      // console.log(data.data);
+      const data = await axios.get(`${BASE_URL_API}/api/v1/animals`,);
+      if (data.data) {
+        setInitTodo(data.data)
+      } else {
+        setInitTodo(data.data)
+      }
+      setIsLoading(false);
     }
     getData();
-  }, [])
+  }, [setInitTodo, setIsLoading])
 
   const handleSearchNameTodo = (nameTodo) => {
     const filterSearch = initTodo.filter(item => item.name.toLowerCase().includes(nameTodo.toLowerCase()));
@@ -66,20 +71,32 @@ function App() {
         status: false,
         id: initTodo.length
       }
-      setInitTodo([...initTodo, newTodo]);
+      const created = axios.post(`${BASE_URL_API}/api/v1/animals`, newTodo).then((rs) => {
+        if (rs) {
+          setInitTodo([...initTodo, newTodo]);
+        }
+      });
     } else {
       const idx = initTodo.findIndex((item) => item.id === crrTodoEdit.id);
       if (idx >= 0) {
         initTodo.splice(idx, 1, crrTodoEdit);
-        setInitTodo([...initTodo]);
+        axios.put(`${BASE_URL_API}/api/v1/animals/${initTodo[idx].id}`, crrTodoEdit).then((rs) => {
+          if (rs) {
+            setInitTodo([...initTodo]);
+          }
+        })
         setIsUpdate(false);
       }
     }
   }
   const handleDropTodo = (id) => {
-    setInitTodo((prev) => {
-      return prev.filter(item => item.id !== id);
-    });
+    axios.delete(`${BASE_URL_API}/api/v1/animals/${id}`).then((rs) => {
+      if (rs) {
+        setInitTodo((prev) => {
+          return prev.filter(item => item.id !== id);
+        });
+      }
+    })
   }
   useEffect(() => {
     if (isUpdate) {
@@ -89,14 +106,6 @@ function App() {
       setCrrTodoEdit({});
     }
   }, [isUpdate]);
-  useEffect(() => {
-    const idTimeOut = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000)
-    return () => {
-      clearTimeout(idTimeOut);
-    }
-  }, []);
   return (
     <langContext.Provider value={{
       lang: lang,
